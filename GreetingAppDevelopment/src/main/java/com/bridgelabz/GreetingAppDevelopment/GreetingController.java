@@ -26,4 +26,11 @@ public class GreetingController {
     public ResponseEntity<List<GreetingMessage>> getAllGreetings() {
         return ResponseEntity.ok(greetingService.getAllGreetings());
     }
+    // ✅ PUT: Update Greeting Message
+    @PutMapping("/update/{id}")
+    public ResponseEntity<GreetingMessage> updateGreeting(
+            @PathVariable Long id, @RequestParam String message) {
+        return ResponseEntity.ok(greetingService.updateGreeting(id, message));
+    }
+
 }
