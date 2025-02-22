@@ -1,32 +1,22 @@
 package com.bridgelabz.GreetingAppDevelopment;
-
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/greeting")
 public class GreetingController {
 
+    private final GreetingService greetingService;
+
+    // Constructor-based Dependency Injection
+    public GreetingController(GreetingService greetingService) {
+        this.greetingService = greetingService;
+    }
+
     // GET Method
     @GetMapping
-    public GreetingDTO getGreeting() {
-        return new GreetingDTO("Hello from GET request!");
-    }
-
-    // POST Method
-    @PostMapping
-    public GreetingDTO postGreeting(@RequestBody GreetingDTO greeting) {
-        return new GreetingDTO("Received via POST: " + greeting.getMessage());
-    }
-
-    // PUT Method
-    @PutMapping
-    public GreetingDTO putGreeting(@RequestBody GreetingDTO greeting) {
-        return new GreetingDTO("Updated via PUT: " + greeting.getMessage());
-    }
-
-    // DELETE Method
-    @DeleteMapping
-    public GreetingDTO deleteGreeting() {
-        return new GreetingDTO("Greeting deleted successfully!");
+    public String getGreeting() {
+        return greetingService.getGreetingMessage();
     }
 }
