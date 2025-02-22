@@ -1,18 +1,55 @@
 package com.bridgelabz.GreetingAppDevelopment;
+//import org.springframework.stereotype.Service;
+//
+//@Service
+//public class GreetingService {
+//
+//    public String getGreetingMessage(UserDTO user) {
+//        if (user.getFirstName() != null && user.getLastName() != null) {
+//            return "Hello, " + user.getFirstName() + " " + user.getLastName() + "!";
+//        } else if (user.getFirstName() != null) {
+//            return "Hello, " + user.getFirstName() + "!";
+//        } else if (user.getLastName() != null) {
+//            return "Hello, " + user.getLastName() + "!";
+//        } else {
+//            return "Hello, World!";
+//        }
+//    }
+//}
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class GreetingService {
 
+    private final GreetingRepository greetingRepository;
+
+    public GreetingService(GreetingRepository greetingRepository) {
+        this.greetingRepository = greetingRepository;
+    }
+
     public String getGreetingMessage(UserDTO user) {
+        String message;
+
         if (user.getFirstName() != null && user.getLastName() != null) {
-            return "Hello, " + user.getFirstName() + " " + user.getLastName() + "!";
+            message = "Hello, " + user.getFirstName() + " " + user.getLastName() + "!";
         } else if (user.getFirstName() != null) {
-            return "Hello, " + user.getFirstName() + "!";
+            message = "Hello, " + user.getFirstName() + "!";
         } else if (user.getLastName() != null) {
-            return "Hello, " + user.getLastName() + "!";
+            message = "Hello, " + user.getLastName() + "!";
         } else {
-            return "Hello, World!";
+            message = "Hello, World!";
         }
+
+        // Save the message in the database
+        greetingRepository.save(new GreetingMessage(message));
+        return message;
+    }
+
+    // Fetch all greetings from the database
+    public List<GreetingMessage> getAllGreetings() {
+        return greetingRepository.findAll();
     }
 }
+
