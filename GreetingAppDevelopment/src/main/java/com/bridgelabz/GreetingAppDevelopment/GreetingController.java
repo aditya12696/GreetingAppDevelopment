@@ -32,5 +32,11 @@ public class GreetingController {
             @PathVariable Long id, @RequestParam String message) {
         return ResponseEntity.ok(greetingService.updateGreeting(id, message));
     }
+    // ✅ DELETE: Remove Greeting Message
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteGreeting(@PathVariable Long id) {
+        greetingService.deleteGreeting(id);
+        return ResponseEntity.ok("Greeting with ID " + id + " deleted successfully!");
+    }
 
 }
