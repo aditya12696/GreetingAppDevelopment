@@ -1,7 +1,5 @@
 package com.bridgelabz.GreetingAppDevelopment;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/greeting")
@@ -14,9 +12,31 @@ public class GreetingController {
         this.greetingService = greetingService;
     }
 
-    // GET Method
+    // ✅ GET Request - Just "Hello, World!"
     @GetMapping
     public String getGreeting() {
-        return greetingService.getGreetingMessage();
+        return greetingService.getGreetingMessage(new UserDTO());
+    }
+
+    // ✅ GET Request - Pass name via Query Parameters
+    @GetMapping("/query")
+    public String getGreetingWithQuery(
+            @RequestParam(required = false) String firstName,
+            @RequestParam(required = false) String lastName) {
+        return greetingService.getGreetingMessage(new UserDTO(firstName, lastName));
+    }
+
+    // ✅ GET Request - Pass name via Path Variables
+    @GetMapping("/param/{firstName}/{lastName}")
+    public String getGreetingWithPath(
+            @PathVariable String firstName,
+            @PathVariable String lastName) {
+        return greetingService.getGreetingMessage(new UserDTO(firstName, lastName));
+    }
+
+    // ✅ POST Request - Pass name in JSON Body
+    @PostMapping("/post")
+    public String getGreetingWithPost(@RequestBody UserDTO user) {
+        return greetingService.getGreetingMessage(user);
     }
 }

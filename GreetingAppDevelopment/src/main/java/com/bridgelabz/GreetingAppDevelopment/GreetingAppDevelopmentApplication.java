@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class GreetingAppDevelopmentApplication {
 
 	public static void main(String[] args) {
-		//enter point of Spring
+		//enter point of SpringBoot
 		SpringApplication.run(GreetingAppDevelopmentApplication.class, args);
 	}
 
