@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class GreetingAppDevelopmentApplication {
 
 	public static void main(String[] args) {
-		// enter point of app Spring Boot
+		// enter point of app Spring Boot using Data Base
 		SpringApplication.run(GreetingAppDevelopmentApplication.class, args);
 	}
 
